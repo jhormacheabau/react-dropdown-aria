@@ -30,7 +30,7 @@
     "packages/*",
     "demo"
   ],
-  "main": "index.d.ts",
+  "main": "index.ts",
   "devDependencies": {},
   "keywords": [
     "aria"
