@@ -1,6 +1,10 @@
 [![CircleCI](https://circleci.com/gh/jfangrad/react-dropdown-aria.svg?style=svg&circle-token=c8db79d70dddf853273a5964b860ec0bf53f5163)](https://circleci.com/gh/jfangrad/react-dropdown-aria/tree/master) [![npm](https://img.shields.io/npm/v/react-dropdown-aria.svg)](https://www.npmjs.com/package/react-dropdown-aria)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dropdown-aria?color=important)
 ![npm](https://img.shields.io/npm/dm/react-dropdown-aria)
+
+## NOTE
+this was forked for a fix to use multiple screen reader software
+
 # react-dropdown-aria
 Simple, lightweight, and accessible React dropdown component.
 

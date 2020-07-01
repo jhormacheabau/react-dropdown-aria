@@ -11,18 +11,18 @@ const listboxStyle = {
   width: 0,
   overflow: 'hidden',
 };
-const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string) => {
+const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string, ariaProps: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement>) => {
   const optionMarkup = flattenedOptions.map((o, i) => (
     <div
       role="option"
       id={`${mergedId}_list_${i}`}
       key={`${mergedId}_list_${i}`}
       aria-selected={i === selectedIndex}
-      aria-label={o.value}
+      aria-label={o.ariaLabel}
     />
   ));
   return (
-    <div role={listbox} id={`${mergedId}_list`} style={listboxStyle}>
+    <div role={listbox} {...ariaProps} id={`${mergedId}_list`} style={listboxStyle}>
       {optionMarkup}
     </div>
   )
@@ -164,7 +164,7 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     inputRef,
     listWrapper,
     ariaProps,
-    ariaList: useAriaList(flattenedOptions, selectedIndex, mergedId),
+    ariaList: useAriaList(flattenedOptions, selectedIndex, mergedId , ariaProps),
   }
 };
 
