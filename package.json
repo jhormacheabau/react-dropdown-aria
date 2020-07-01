@@ -1,6 +1,6 @@
 {
-  "name": "@react-dropdown-aria/monorepo",
-  "private": true,
+  "name": "react-dropdown-aria-jesus",
+  "private": false,
   "version": "1.0.0",
   "description": "Simple and accessible React dropdown component",
   "repository": {
@@ -29,5 +29,10 @@
   "workspaces": [
     "packages/*",
     "demo"
+  ],
+  "main": "babel.config.js",
+  "devDependencies": {},
+  "keywords": [
+    "aria"
   ]
 }
