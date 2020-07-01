@@ -1,7 +1,7 @@
 {
   "name": "react-dropdown-aria-jesus",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple and accessible React dropdown component",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "packages/*",
     "demo"
   ],
-  "main": "babel.config.js",
+  "main": "index.d.ts",
   "devDependencies": {},
   "keywords": [
     "aria"
