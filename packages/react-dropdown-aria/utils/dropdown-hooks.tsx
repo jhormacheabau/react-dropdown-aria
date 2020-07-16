@@ -11,7 +11,7 @@ const listboxStyle = {
   width: 0,
   overflow: 'hidden',
 };
-const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string, ariaProps: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement>) => {
+const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string, ariaPropDiv: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement>) => {
   const optionMarkup = flattenedOptions.map((o, i) => (
     <div
       role="option"
@@ -22,7 +22,7 @@ const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId
     />
   ));
   return (
-    <div role={listbox} {...ariaProps} id={`${mergedId}_list`} style={listboxStyle}>
+    <div role={listbox} {...ariaPropDiv} id={`${mergedId}_list`} style={listboxStyle}>
       {optionMarkup}
     </div>
   )
@@ -94,7 +94,7 @@ const useSearch = (setFocusedIndex: Dispatch<SetStateAction<number>>, options: D
 
 export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
   const { style, options, searchable, onChange, disabled, ariaDescribedBy, ariaLabel, ariaLabelledBy, value, defaultOpen } = props;
-  const [focusedIndex, setFocusedIndex] = useState(0)
+  const [focusedIndex, setFocusedIndex] = useState(-1)
   const [open, setOpen] = useState(defaultOpen);
   const container = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -115,10 +115,11 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
   const closeDropdown = useCallback((focus = false) => {
     setSearchTerm('', false);
     setOpen(false);
+    setFocusedIndex(-1);
     if (focus && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef.current, setSearchTerm, setOpen]);
+  }, [inputRef.current, setSearchTerm, setOpen, setFocusedIndex]);
 
   const openDropdown = useCallback(() => {
     setFocusedIndex(selectedIndex > 0 ? selectedIndex : 0);
@@ -149,6 +150,15 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-describedby': ariaDescribedBy,
   }), [disabled, open, mergedId, focusedIndex, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
 
+  const ariaPropDiv = useMemo(() => ({
+    'aria-hidden': disabled,
+    'aria-expanded': open,
+    'aria-haspopup': listbox,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
+  }), [disabled, open, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
+
   return {
     focusedIndex, setFocusedIndex,
     open, setOpen,
@@ -164,7 +174,7 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     inputRef,
     listWrapper,
     ariaProps,
-    ariaList: useAriaList(flattenedOptions, selectedIndex, mergedId , ariaProps),
+    ariaList: useAriaList(flattenedOptions, selectedIndex, mergedId, ariaPropDiv),
   }
 };
 
