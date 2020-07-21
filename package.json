@@ -1,15 +1,14 @@
 {
-  "name": "react-dropdown-aria-jesus",
+  "name": "react-dropdown-aria-label",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.0.1",
   "description": "Simple and accessible React dropdown component",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jfangrad/react-dropdown-aria.git"
   },
   "scripts": {
-    "prebuild": "cp ./README.md ./packages/react-dropdown-aria/README.md",
-    "build": "yarn lib:build && yarn demo:build",
+    "build": "yarn lib:build",
     "deploy": "yarn --cwd ./demo deploy",
     "demo:dev": "yarn --cwd ./demo dev",
     "demo:build": "yarn --cwd ./demo build",

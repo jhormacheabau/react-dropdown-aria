@@ -1,12 +1,12 @@
 {
-  "name": "react-dropdown-aria-jesus",
-  "version": "1.0.7",
+  "name": "react-dropdown-aria-label",
+  "version": "1.0.3",
   "description": "Simple and accessible React dropdown component",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rd /s /q dist",
     "predev": "yarn clean",
     "dev": "rollup -c -w",
     "prebuild": "yarn clean",

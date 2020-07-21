@@ -176,7 +176,7 @@ const Dropdown = (props: DropdownProps) => {
         {ArrowMarkup}
       </div>
       {ariaList}
-      <div className={contentClass} ref={listWrapper}>
+      <div className={contentClass} ref={listWrapper} aria-hidden="true">
         <DropdownContent
           selectedOption={value}
           options={filteredOptions}
