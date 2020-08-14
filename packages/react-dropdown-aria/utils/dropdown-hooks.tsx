@@ -143,7 +143,7 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-hidden': disabled,
     'aria-expanded': open,
     'aria-haspopup': listbox,
-    'aria-activedescendant': `${mergedId}_list_${focusedIndex}`,
+    'aria-activedescendant': focusedIndex === -1 ? '' : `${mergedId}_list_${focusedIndex}`,
     'aria-controls': `${mergedId}_list`,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
