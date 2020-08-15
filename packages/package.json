@@ -1,0 +1,22 @@
+{
+  "name": "react-dropdown-aria-jesus",
+  "version": "1.0.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhormacheabau/react-dropdown-aria.git"
+  },
+  "keywords": [
+    "aria"
+  ],
+  "author": "Jesus Hormachea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhormacheabau/react-dropdown-aria/issues"
+  },
+  "homepage": "https://github.com/jhormacheabau/react-dropdown-aria#readme"
+}

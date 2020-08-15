@@ -1,6 +1,6 @@
 {
-  "name": "react-dropdown-aria",
-  "version": "2.0.5",
+  "name": "react-dropdown-aria-jesus",
+  "version": "1.0.11",
   "description": "Simple and accessible React dropdown component",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -63,10 +63,11 @@
     "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "rollup": "^2.10.2",
+    "rollup": "^2.25.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.2",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-typescript2": "^0.27.1",
+    "rollup-plugin-typescript2": "^0.27.2",
     "sinon": "^6.1.5",
     "ts-jest": "^25.5.0",
     "typescript": "^3.8.3"

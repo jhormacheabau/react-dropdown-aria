@@ -1,14 +1,8 @@
-[![CircleCI](https://circleci.com/gh/jfangrad/react-dropdown-aria.svg?style=svg&circle-token=c8db79d70dddf853273a5964b860ec0bf53f5163)](https://circleci.com/gh/jfangrad/react-dropdown-aria/tree/master) [![npm](https://img.shields.io/npm/v/react-dropdown-aria.svg)](https://www.npmjs.com/package/react-dropdown-aria)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-dropdown-aria?color=important)
-![npm](https://img.shields.io/npm/dm/react-dropdown-aria)
+## NOTE
+this was forked for a patch to use screen reader desktop software
+
 # react-dropdown-aria
 Simple, lightweight, and accessible React dropdown component.
-
-## Purpose
-This component was created to be a light weight and fully accessible dropdown component for React. For a more feature heavy and powerful dropdown look to the [react-select](https://github.com/JedWatson/react-select) package. (This dropdown is inspired by react-select)
-
-## **Upgrading to v2**
-Please take note when upgrading from v1 to v2 there are breaking changes. Be sure to carefully read the [changelog entry for v2.0.0](https://github.com/jfangrad/react-dropdown-aria/blob/master/packages/react-dropdown-aria/CHANGELOG.md#200).
 
 ## Features
 1. Fully customizable styling
@@ -19,7 +13,7 @@ Please take note when upgrading from v1 to v2 there are breaking changes. Be sur
 6. Typescript typings
 
 # Demo And Examples
-For demo and examples see [https://jfangrad.github.io/react-dropdown-aria/](https://jfangrad.github.io/react-dropdown-aria/)
+For demo and examples of the original see [https://jfangrad.github.io/react-dropdown-aria/](https://jfangrad.github.io/react-dropdown-aria/)
 
 # Installation
 Simply use npm or yarn to install the package.

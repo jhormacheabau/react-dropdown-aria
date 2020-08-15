@@ -19,7 +19,6 @@ const Dropdown = (props: DropdownProps) => {
     placeholder,
     searchable,
     value,
-    selectedValueClassName,
   } = props;
 
   const mergedId = useId(id);
@@ -64,12 +63,12 @@ const Dropdown = (props: DropdownProps) => {
     switch (keyCode) {
       case KEY_CODES.UP_ARROW:
         setFocusedIndex(prev => {
-          if(prev === 0) return flattenedOptions.length - 1;
+          if (prev === 0) return flattenedOptions.length - 1;
           return prev - 1;
         });
         break;
       case KEY_CODES.DOWN_ARROW:
-          setFocusedIndex(p => ((p + 1) % flattenedOptions.length));
+        setFocusedIndex(p => ((p + 1) % flattenedOptions.length));
         break;
       case KEY_CODES.PAGE_UP:
         setFocusedIndex(prev => {
@@ -126,7 +125,6 @@ const Dropdown = (props: DropdownProps) => {
   const selectorClass = cx('dropdown-selector', getStyle(StyleKeys.DropdownSelector));
   const searchClass = cx('dropdown-selector-search', getStyle(StyleKeys.SelectorSearch));
   const placeholderClass = cx('dropdown-selector-placeholder', getStyle(StyleKeys.Placeholder));
-  const selectorValueClass = cx('dropdown-selector-value', selectedValueClassName, getStyle(StyleKeys.SelectedValue));
   const contentClass = cx('dropdown-selector-content', contentClassName, getStyle(StyleKeys.OptionContainer));
   const arrowClass = cx('dropdown-arrow', getStyle(StyleKeys.Arrow));
 
@@ -159,7 +157,7 @@ const Dropdown = (props: DropdownProps) => {
           <input
             id={mergedId}
             ref={inputRef}
-            value={searchTerm}
+            value={value ? value : searchTerm}
             onChange={handleTermChange}
             onKeyDown={handleInputKeyDown}
             onFocus={onFocus}
@@ -172,7 +170,6 @@ const Dropdown = (props: DropdownProps) => {
           />
         </span>
         {(!value && !searchTerm) && <span className={placeholderClass}>{placeholder}</span>}
-        {(value && !searchTerm) && <span className={selectorValueClass}>{value}</span>}
         {ArrowMarkup}
       </div>
       {ariaList}
@@ -210,7 +207,6 @@ Dropdown.defaultProps = {
   pageKeyTraverseSize: 10,
   placeholder: 'Select ...',
   searchable: false,
-  selectedValueClassName: null,
   style: {},
   value: undefined,
   width: null,

@@ -27,7 +27,7 @@ function DropdownContent({
 }: DropdownContentProps) {
   if (empty) {
     return (
-      <div className="dropdown-selector-content--empty">
+      <div aria-label="no data" className="dropdown-selector-content--empty">
         <Inbox />
         No data
       </div>
