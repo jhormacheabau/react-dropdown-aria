@@ -64,12 +64,12 @@ const Dropdown = (props: DropdownProps) => {
     switch (keyCode) {
       case KEY_CODES.UP_ARROW:
         setFocusedIndex(prev => {
-          if(prev === 0) return flattenedOptions.length - 1;
+          if (prev === 0) return flattenedOptions.length - 1;
           return prev - 1;
         });
         break;
       case KEY_CODES.DOWN_ARROW:
-          setFocusedIndex(p => ((p + 1) % flattenedOptions.length));
+        setFocusedIndex(p => ((p + 1) % flattenedOptions.length));
         break;
       case KEY_CODES.PAGE_UP:
         setFocusedIndex(prev => {
@@ -129,6 +129,8 @@ const Dropdown = (props: DropdownProps) => {
   const selectorValueClass = cx('dropdown-selector-value', selectedValueClassName, getStyle(StyleKeys.SelectedValue));
   const contentClass = cx('dropdown-selector-content', contentClassName, getStyle(StyleKeys.OptionContainer));
   const arrowClass = cx('dropdown-arrow', getStyle(StyleKeys.Arrow));
+  const LoaderClass = cx('loader', getStyle(StyleKeys.Loader));
+  const IconContainerClass = cx('icon-container', getStyle(StyleKeys.IconContainer));
 
   const ArrowMarkup = useMemo(() => {
     if (hideArrow) return null;
@@ -146,6 +148,15 @@ const Dropdown = (props: DropdownProps) => {
       </div>
     );
   }, [open, arrowRenderer, arrowClass, searchable, hideArrow]);
+
+  const Spinner = useMemo(() => {
+    if (!hideArrow) return null;
+
+    return (
+      <div className={IconContainerClass}>
+        <i className={LoaderClass}></i>
+      </div>);
+  }, [hideArrow , IconContainerClass , LoaderClass])
 
   return (
     <div
@@ -174,6 +185,7 @@ const Dropdown = (props: DropdownProps) => {
         {(!value && !searchTerm) && <span className={placeholderClass}>{placeholder}</span>}
         {(value && !searchTerm) && <span className={selectorValueClass}>{value}</span>}
         {ArrowMarkup}
+        {Spinner}
       </div>
       {ariaList}
       <div className={contentClass} ref={listWrapper} aria-hidden="true">

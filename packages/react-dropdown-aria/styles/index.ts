@@ -52,7 +52,7 @@ const SelectorSearch = (): CSSObject => ({
   top: 0,
 });
 
-const inputValueStyleBase  = ({ centerText }: DropdownProps): CSSObject => ({
+const inputValueStyleBase = ({ centerText }: DropdownProps): CSSObject => ({
   bottom: 0,
   left: '11px',
   lineHeight: '30px',
@@ -185,6 +185,57 @@ const OptionItem = (props: DropdownProps, state: DropdownStyleDependantState, { 
   };
 };
 
+const Loader = (): CSSObject => ({
+
+  position: `relative`,
+  height: `20px`,
+  width: `20px`,
+  display: `inline - block`,
+  animation: `around 5.4s infinite`,
+
+  '.loader::after': {
+    content: `""`,
+    background: `white`,
+    position: `absolute`,
+    display: `inline-block`,
+    width: `100%`,
+    height: `100%`,
+    borderWidth: `2px`,
+    borderColor: `#333 #333 transparent transparent`,
+    borderStyle: `solid`,
+    borderRadius: `20px`,
+    boxSizing: `border-box`,
+    top: 0,
+    left: 0,
+    animation: `around 0.7s ease-in-out infinite`,
+  },
+
+  '.loader::before': {
+    content: `""`,
+    background: `white`,
+    position: `absolute`,
+    display: `inline-block`,
+    width: `100%`,
+    height: `100%`,
+    borderWidth: `2px`,
+    borderColor: `#333 #333 transparent transparent`,
+    borderStyle: `solid`,
+    borderRadius: `20px`,
+    boxSizing: `border-box`,
+    top: 0,
+    left: 0,
+    animation: `around 0.7s ease-in-out infinite`,
+
+  }
+})
+
+const IconContanier = (): CSSObject => ({
+  position: `absolute`,
+  right: `10px`,
+  top: `calc(50 % - 10px);`
+})
+
+
 export default {
   Arrow,
   DropdownSelector,
@@ -197,4 +248,6 @@ export default {
   Placeholder,
   SelectedValue,
   SelectorSearch,
+  Loader,
+  IconContanier
 };

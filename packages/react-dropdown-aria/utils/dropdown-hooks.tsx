@@ -13,7 +13,7 @@ const listboxStyle = {
 };
 const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string, ariaPropDiv: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement>) => {
   const optionMarkup = flattenedOptions.map((o, i) => (
-    <div
+    <li
       role="option"
       id={`${mergedId}_list_${i}`}
       key={`${mergedId}_list_${i}`}
@@ -22,8 +22,10 @@ const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId
     />
   ));
   return (
-    <div role={listbox} {...ariaPropDiv} id={`${mergedId}_list`} style={listboxStyle}>
-      {optionMarkup}
+    <div {...ariaPropDiv} >
+      <ul role={listbox} id={`${mergedId}_list`} style={listboxStyle}>
+        {optionMarkup}
+      </ul>
     </div>
   )
 };
@@ -66,7 +68,7 @@ const useScroll = (focusedIndex: number, optionContainer: RefObject<HTMLDivEleme
           if (isAbove) {
             optionContainer.current.scrollTo({ top: focusedChild.offsetTop });
           } else {
-            optionContainer.current.scrollTo({ top: focusedChild.offsetTop - listHeight + optionHeight + ScrollBuffer});
+            optionContainer.current.scrollTo({ top: focusedChild.offsetTop - listHeight + optionHeight + ScrollBuffer });
           }
         }
       }
@@ -94,7 +96,7 @@ const useSearch = (setFocusedIndex: Dispatch<SetStateAction<number>>, options: D
 
 export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
   const { style, options, searchable, onChange, disabled, ariaDescribedBy, ariaLabel, ariaLabelledBy, value, defaultOpen } = props;
-  const [focusedIndex, setFocusedIndex] = useState(-1)
+  const [focusedIndex, setFocusedIndex] = useState(0)
   const [open, setOpen] = useState(defaultOpen);
   const container = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -115,11 +117,10 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
   const closeDropdown = useCallback((focus = false) => {
     setSearchTerm('', false);
     setOpen(false);
-    setFocusedIndex(-1);
     if (focus && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputRef.current, setSearchTerm, setOpen, setFocusedIndex]);
+  }, [inputRef.current, setSearchTerm, setOpen]);
 
   const openDropdown = useCallback(() => {
     setFocusedIndex(selectedIndex > 0 ? selectedIndex : 0);
@@ -154,10 +155,12 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-hidden': disabled,
     'aria-expanded': open,
     'aria-haspopup': listbox,
+    'aria-activedescendant': `${mergedId}_list_${focusedIndex}`,
+    'aria-controls': `${mergedId}_list`,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
-  }), [disabled, open, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
+  }), [ariaLabel, ariaLabelledBy, ariaDescribedBy]);
 
   return {
     focusedIndex, setFocusedIndex,
