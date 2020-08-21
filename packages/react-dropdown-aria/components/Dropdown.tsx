@@ -19,6 +19,7 @@ const Dropdown = (props: DropdownProps) => {
     placeholder,
     searchable,
     value,
+    loading
   } = props;
 
   const mergedId = useId(id);
@@ -127,9 +128,11 @@ const Dropdown = (props: DropdownProps) => {
   const placeholderClass = cx('dropdown-selector-placeholder', getStyle(StyleKeys.Placeholder));
   const contentClass = cx('dropdown-selector-content', contentClassName, getStyle(StyleKeys.OptionContainer));
   const arrowClass = cx('dropdown-arrow', getStyle(StyleKeys.Arrow));
+  const iconContainerClass = cx('icon-container', getStyle(StyleKeys.IconContainer));
+  const loaderClass = cx('loader', getStyle(StyleKeys.Loader));
 
   const ArrowMarkup = useMemo(() => {
-    if (hideArrow) return null;
+    if (hideArrow || loading) return null;
     if (arrowRenderer) return (
       <div className={arrowClass}>
         {arrowRenderer(open)}
@@ -143,7 +146,15 @@ const Dropdown = (props: DropdownProps) => {
         {!showSearchIcon && <ChevronDown />}
       </div>
     );
-  }, [open, arrowRenderer, arrowClass, searchable, hideArrow]);
+  }, [open, arrowRenderer, arrowClass, searchable, hideArrow, loading]);
+
+  const LoaderMarkup = useMemo(() => {
+    if (!loading) return null;
+    return (
+      <div className={iconContainerClass}>
+        <i className={loaderClass}></i>
+      </div>)
+  }, [loading, iconContainerClass, loaderClass]);
 
   return (
     <div
@@ -169,6 +180,7 @@ const Dropdown = (props: DropdownProps) => {
             {...ariaProps}
           />
         </span>
+        {LoaderMarkup}
         {(!value && !searchTerm) && <span className={placeholderClass}>{placeholder}</span>}
         {ArrowMarkup}
       </div>

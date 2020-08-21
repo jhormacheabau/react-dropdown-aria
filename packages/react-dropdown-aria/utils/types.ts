@@ -86,4 +86,5 @@ export interface DropdownProps {
   onChange: (option: Option) => void;
   style: DropdownStyle;
   width: number;
+  loading: boolean;
 }

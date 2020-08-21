@@ -1,6 +1,6 @@
 {
-  "name": "react-dropdown-aria-jesus",
-  "version": "1.0.11",
+  "name": "react-dropdown-aria-label",
+  "version": "1.0.5",
   "description": "Simple and accessible React dropdown component",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
