@@ -12,15 +12,24 @@ const listboxStyle = {
   overflow: 'hidden',
 };
 const useAriaList = (flattenedOptions: Option[], selectedIndex: number, mergedId: string, ariaPropDiv: JSX.IntrinsicAttributes & React.ClassAttributes<HTMLDivElement> & React.HTMLAttributes<HTMLDivElement>) => {
-  const optionMarkup = flattenedOptions.map((o, i) => (
+  const optionMarkup = flattenedOptions.length > 0 ?
+    flattenedOptions.map((o, i) => (
+      <div
+        role="option"
+        id={`${mergedId}_list_${i}`}
+        key={`${mergedId}_list_${i}`}
+        aria-selected={i === selectedIndex}
+        aria-label={o.ariaLabel}
+      />
+    )) :
     <div
       role="option"
-      id={`${mergedId}_list_${i}`}
-      key={`${mergedId}_list_${i}`}
-      aria-selected={i === selectedIndex}
-      aria-label={o.ariaLabel}
-    />
-  ));
+      id={`${mergedId}_list_0`}
+      key={`${mergedId}_list_0`}
+      aria-selected={false}
+      aria-label='No Data'
+      aria-hidden={true}
+    />;
   return (
     <div role={listbox} {...ariaPropDiv} id={`${mergedId}_list`} style={listboxStyle}>
       {optionMarkup}
@@ -66,7 +75,7 @@ const useScroll = (focusedIndex: number, optionContainer: RefObject<HTMLDivEleme
           if (isAbove) {
             optionContainer.current.scrollTo({ top: focusedChild.offsetTop });
           } else {
-            optionContainer.current.scrollTo({ top: focusedChild.offsetTop - listHeight + optionHeight + ScrollBuffer});
+            optionContainer.current.scrollTo({ top: focusedChild.offsetTop - listHeight + optionHeight + ScrollBuffer });
           }
         }
       }
@@ -145,6 +154,7 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-haspopup': listbox,
     'aria-activedescendant': focusedIndex === -1 ? '' : `${mergedId}_list_${focusedIndex}`,
     'aria-controls': `${mergedId}_list`,
+    'aria-owns': `${mergedId}_list`,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
