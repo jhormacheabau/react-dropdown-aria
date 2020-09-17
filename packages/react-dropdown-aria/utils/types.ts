@@ -65,6 +65,7 @@ export interface DropdownProps {
   ariaDescribedBy: string;
   ariaLabel: string;
   ariaLabelledBy: string;
+  ariaRequired: boolean;
   arrowRenderer: (open: boolean) => ReactNode;
   className: string;
   centerText: boolean;

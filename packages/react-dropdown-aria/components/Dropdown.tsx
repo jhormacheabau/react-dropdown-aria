@@ -204,6 +204,7 @@ Dropdown.defaultProps = {
   ariaDescribedBy: null,
   ariaLabel: null,
   ariaLabelledBy: null,
+  ariaRequired: false,
   arrowRenderer: undefined,
   centerText: false,
   className: undefined,

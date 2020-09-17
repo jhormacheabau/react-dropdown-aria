@@ -102,7 +102,7 @@ const useSearch = (setFocusedIndex: Dispatch<SetStateAction<number>>, options: D
 };
 
 export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
-  const { style, options, searchable, onChange, disabled, ariaDescribedBy, ariaLabel, ariaLabelledBy, value, defaultOpen } = props;
+  const { style, options, searchable, onChange, disabled, ariaDescribedBy, ariaLabel, ariaLabelledBy, ariaRequired, value, defaultOpen } = props;
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const [open, setOpen] = useState(defaultOpen);
   const container = useRef<HTMLDivElement>(null);
@@ -158,7 +158,8 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
-  }), [disabled, open, mergedId, focusedIndex, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
+    'aria-required': ariaRequired,
+  }), [disabled, open, mergedId, focusedIndex, ariaLabel, ariaLabelledBy, ariaDescribedBy , ariaRequired]);
 
   const ariaPropDiv = useMemo(() => ({
     'aria-hidden': disabled,
@@ -167,7 +168,8 @@ export const useDropdownHooks = (props: DropdownProps, mergedId: string) => {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
-  }), [disabled, open, ariaLabel, ariaLabelledBy, ariaDescribedBy]);
+    'aria-required': ariaRequired
+  }), [disabled, open, ariaLabel, ariaLabelledBy, ariaDescribedBy , ariaRequired]);
 
   return {
     focusedIndex, setFocusedIndex,
