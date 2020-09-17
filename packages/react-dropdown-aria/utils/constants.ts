@@ -10,9 +10,8 @@ export enum StyleKeys {
   GroupHeading = 'GroupHeading',
   OptionContainer = 'OptionContainer',
   OptionItem = 'OptionItem',
-  Loader = 'Loader',
-  IconContainer = 'IconContainer'
-  
+  IconContainer = 'IconContainer',
+  Loader = 'Loader'
 }
 
 export enum KEY_CODES {

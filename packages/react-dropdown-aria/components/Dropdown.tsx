@@ -19,7 +19,7 @@ const Dropdown = (props: DropdownProps) => {
     placeholder,
     searchable,
     value,
-    selectedValueClassName,
+    loading
   } = props;
 
   const mergedId = useId(id);
@@ -126,14 +126,13 @@ const Dropdown = (props: DropdownProps) => {
   const selectorClass = cx('dropdown-selector', getStyle(StyleKeys.DropdownSelector));
   const searchClass = cx('dropdown-selector-search', getStyle(StyleKeys.SelectorSearch));
   const placeholderClass = cx('dropdown-selector-placeholder', getStyle(StyleKeys.Placeholder));
-  const selectorValueClass = cx('dropdown-selector-value', selectedValueClassName, getStyle(StyleKeys.SelectedValue));
   const contentClass = cx('dropdown-selector-content', contentClassName, getStyle(StyleKeys.OptionContainer));
   const arrowClass = cx('dropdown-arrow', getStyle(StyleKeys.Arrow));
-  const LoaderClass = cx('loader', getStyle(StyleKeys.Loader));
-  const IconContainerClass = cx('icon-container', getStyle(StyleKeys.IconContainer));
+  const iconContainerClass = cx('icon-container', getStyle(StyleKeys.IconContainer));
+  const loaderClass = cx('loader', getStyle(StyleKeys.Loader));
 
   const ArrowMarkup = useMemo(() => {
-    if (hideArrow) return null;
+    if (hideArrow || loading) return null;
     if (arrowRenderer) return (
       <div className={arrowClass}>
         {arrowRenderer(open)}
@@ -147,16 +146,24 @@ const Dropdown = (props: DropdownProps) => {
         {!showSearchIcon && <ChevronDown />}
       </div>
     );
-  }, [open, arrowRenderer, arrowClass, searchable, hideArrow]);
+  }, [open, arrowRenderer, arrowClass, searchable, hideArrow, loading]);
+
+  const LoaderMarkup = useMemo(() => {
+    if (!loading) return null;
+    return (
+      <div className={iconContainerClass}>
+        <i className={loaderClass}></i>
+      </div>)
+  }, [loading, iconContainerClass, loaderClass]);
 
   const Spinner = useMemo(() => {
     if (!hideArrow) return null;
 
     return (
-      <div className={IconContainerClass}>
-        <i className={LoaderClass}></i>
+      <div className={iconContainerClass}>
+        <i className={loaderClass}></i>
       </div>);
-  }, [hideArrow , IconContainerClass , LoaderClass])
+  }, [hideArrow , iconContainerClass , loaderClass])
 
   return (
     <div
@@ -170,7 +177,7 @@ const Dropdown = (props: DropdownProps) => {
           <input
             id={mergedId}
             ref={inputRef}
-            value={searchTerm}
+            value={value ? value : searchTerm}
             onChange={handleTermChange}
             onKeyDown={handleInputKeyDown}
             onFocus={onFocus}
@@ -182,8 +189,8 @@ const Dropdown = (props: DropdownProps) => {
             {...ariaProps}
           />
         </span>
+        {LoaderMarkup}
         {(!value && !searchTerm) && <span className={placeholderClass}>{placeholder}</span>}
-        {(value && !searchTerm) && <span className={selectorValueClass}>{value}</span>}
         {ArrowMarkup}
         {Spinner}
       </div>
@@ -222,7 +229,6 @@ Dropdown.defaultProps = {
   pageKeyTraverseSize: 10,
   placeholder: 'Select ...',
   searchable: false,
-  selectedValueClassName: null,
   style: {},
   value: undefined,
   width: null,
